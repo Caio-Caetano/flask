@@ -82,6 +82,8 @@ def vincular_arquivos():
                 uploadSuccessfully.append({'user':user, 'cod_bar':cod_bar, 'value':value, 'due_date':due_date, 'file_name':oneFile.filename})
                 uploadUnsuccessfuly.remove(user)
     
+    print(uploadSuccessfully)
+    print(uploadUnsuccessfuly)
     return {'success':uploadSuccessfully, 'unsuccess':uploadUnsuccessfuly}
 
 if __name__ == '__main__':
