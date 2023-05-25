@@ -22,7 +22,7 @@ def index():
 def get_bill_info():
     files = request.files.getlist('files')
 
-    regex_cod_bar = r'\d{5}\.\d{5}\s\d{5}\.\d{6}\s\d{5}\.\d{6}\s\d\s\d{14}'
+    regex_cod_bar = r'\d{5}\.\d{5}\s\d{5}\.\d{6}\s\d{5}\.\d{6}\s\d\s\d+'
     regex_due_date = r'(\d{2}/\d{2}/\d{4})'
     regex_value = r'(\d{1,3}(?:\.\d{3})*,\d{2})'
 
@@ -55,7 +55,7 @@ def vincular_arquivos():
     residents_list = json.loads(residents_json)
     files = request.files.getlist('files')
 
-    regex_cod_bar = r'\d{5}\.\d{5}\s\d{5}\.\d{6}\s\d{5}\.\d{6}\s\d\s\d{14}'
+    regex_cod_bar = r'\d{5}\.\d{5}\s\d{5}\.\d{6}\s\d{5}\.\d{6}\s\d\s\d+'
     regex_due_date = r'(\d{2}/\d{2}/\d{4})'
     regex_value = r'(\d{1,3}(?:\.\d{3})*,\d{2})'
 
@@ -78,12 +78,10 @@ def vincular_arquivos():
             value = value_match.group(1) if value_match else None
             cod_bar = cod_bar_match.group().replace('\n', '') if cod_bar_match else None
 
-            if name_user_match and cpf_user_match:
+            if name_user_match and cpf_user_match and user['id'] != -1:
                 uploadSuccessfully.append({'user':user, 'cod_bar':cod_bar, 'value':value, 'due_date':due_date, 'file_name':oneFile.filename})
                 uploadUnsuccessfuly.remove(user)
-    
-    print(uploadSuccessfully)
-    print(uploadUnsuccessfuly)
+
     return {'success':uploadSuccessfully, 'unsuccess':uploadUnsuccessfuly}
 
 if __name__ == '__main__':
